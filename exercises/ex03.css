@@ -1,0 +1,25 @@
+
+.test-div {
+   background: orange;
+   padding: 20px;
+   margin: 20px; 
+}
+
+.test-div h2 {
+    color: rgb(29, 29, 156);
+}
+.test-div:hover { background: rgb(95, 95, 232)}
+
+.test-div {color:blue;
+}
+
+.test-div:hover { text-decoration: orange;
+}
+
+h1, h2, h3, h4 {
+    text-dectoration: underline;
+}
+
+<button.special {
+    background: orange;
+}
