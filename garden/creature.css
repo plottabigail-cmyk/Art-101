@@ -11,3 +11,50 @@
     gap: 20px;
     margin: 50px;
 }
+
+#creature-form DIV {
+    margin-bottom: 10px;
+}
+
+#creature-list>DIV {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.creature-body {
+    background: style=background: $(crColor)
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100px;
+    height: 100px;
+}
+
+.eye { height: 18px; width: 10px; border: 2px solid #000; border-radius: 10px; background: #fff;}
+$("#add-creature").click(
+    function () {
+
+        // grab the value from the input
+        let crName = $("#crName").val();
+        let crColor= $("#crColor").val();
+        let crEyesNum= $("#crEyesNum").val();
+
+
+        // check for the field value do not add empty ones
+        if ( (crName == "") || (crName.length>12) ) { // do nothing 
+        }
+        else {
+            $("#creature-list").append(`
+<div class="creature">
+    <div class="creature-body" style="background: ${crColor}"></div>
+    <div class="creature-info">${crName}</div>
+</div>
+`);
+        }
+
+        // remove the name after it's added
+        $("#crName").val("");
+
+    });
