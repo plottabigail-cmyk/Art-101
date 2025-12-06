@@ -1,34 +1,112 @@
 
-//when the button is clicked (event)
-$("add-creature-twice").click(function(){
-    // grab the value from the input
+// memorize all creatures in array
+let allCreatures = [];
 
-    //reachfor this input field and grab the text from it
-    let crName = $("#crName").val();
-    $(creature-list).append(crName + ",");
+// random name api
+async function getRandomName() {
 
-    //remove the name after it's added
-    $("crName").val("done!");
-})
+   const response = await fetch(
+"https://api.gofakeit.com/funcs/petname", 
+{method: "GET",});
+
+   const nameRandom = await response.text();
+   console.log("Got name:", nameRandom);
+   return nameRandom;
+}
+
+// grabs data from the form
+function getCreatureFromForm() {
+    const freshCreature = {
+        name: $("#crName").val(),
+        color: $("#crColor").val(),
+        eyesNum: $("#crEyesNum").val()
+    };
+
+    return freshCreature;
+};
+
+// random creature
+async function randomizeCreature() {
+
+   const eyesRandom = Math.floor(Math.random() * 5) + 1;
+   const nameRandom = await getRandomName();
+   const colorRandom = "grey";
+
+   const randomCreature = {
+       name: nameRandom,
+       color: colorRandom,
+       eyesNum: eyesRandom
+   };
+
+   return randomCreature;
+}
+
+// grabs data from the form
+function getCreatureFromForm() {
+    const freshCreature = {
+        name: $("#crName").val(),
+        color: $("#crColor").val(),
+        eyesNum: $("#crEyesNum").val()
+    };
+
+    return freshCreature;
+};
+
+// prepare HTML for a single creature (does NOT add to the page)
+function renderCreature(creature) {
+  let crEyesHTML = "";
+
+  for (let i = 0; i < creature.eyesNum; i++) {
+    crEyesHTML = crEyesHTML + "<div class='eye'>.</div>";
+  }
+
+  const html=`
+<div class="creature">
+  <div class="creature-body" style="background: ${creature.color}">
+${crEyesHTML}
+  </div>
+  <div class="creature-info">❤️${creature.name}</div>
+</div>
+`;
+  return html;
+}
+
+
+// append one creature to the DOM using its HTML
+function addCreatureToDOM(creature) {
+  html = renderCreature(creature);
+  $("#creature-list").append(html);
+
+}
+
+// check if creature data is valid
+function isCreatureValid(creature) {
+  if (creature.name === "") return false;
+  if (creature.name.length > 12) return false;
+  if (creature.eyesNum=="" || creature.eyesNum > 5) return false;
+  return true;  
+}
+
+// clear all form fields
+function clearForm() {
+  $("#crName").val("");
+  $("#crColor").val("#ee7dea");  // or keep previous if you prefer
+  $("#crEyesNum").val(1);
+}
+
+
+
+// BUTTON HANDLERS
 
 $("#add-creature").click(
-    function () {
+    async function () {
 
-        // grab the value from the input
-        let crName = $("#crName").val();
-        let crColor= $("#crColor").val();
-        let crEyesNum= $("#crEyesNum").val();
+ 
+    let newCreature;
 
-
-        // check for the field value do not add empty ones
-        if ( (crName == "") || (crName.length>12) ) { // do nothing 
-        }
-        else {
-            $("#creature-list").append("<div>" +crName + ", " +crColor + ", " +crEyesNum + "</div> ");
-        }
-
-        // remove the name after it's added
-        $("#crName").val("");
-
-    
-    });
+   // choose the source for a creature
+    if( $("#crRandom").is(':checked') ) 
+    { newCreature= await randomizeCreature();}
+    else 
+    { newCreature= getCreatureFromForm(); }
+... (15 lines left)

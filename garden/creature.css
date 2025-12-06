@@ -24,7 +24,7 @@
 }
 
 .creature-body {
-    background: style=background: $(crColor)
+    background: style=background; $(crColor)
     justify-content: center;
     align-items: center;
     display: flex;

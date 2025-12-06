@@ -22,4 +22,15 @@ $("#needy-button").html(totalNumbers);
 //on our button
 //show "clicked total number times"
 
-//a top limit
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#statue").fadeOut();
+    });
+});
+
+
+alert("Uh Oh, Where'd She Go?")
+
+
+
+

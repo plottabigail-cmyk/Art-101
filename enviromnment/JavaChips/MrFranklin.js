@@ -1,0 +1,2 @@
+"markdow.preview.scrollEditorWithPreview":false,
+"markdown.preview.scrollPreviewWithEditor": false
